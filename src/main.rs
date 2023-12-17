@@ -25,31 +25,4 @@ fn main() {
     });
 
     application.run();
-    // gtk::main();
-
-    // let app = Application::builder()
-    //     .application_id("moy.kieran.wiregc")
-    //     .build();
-
-    // app.connect_activate(|app| {
-    //     let win = ApplicationWindow::builder()
-    //         .application(app)
-    //         .default_width(320)
-    //         .default_height(200)
-    //         .resizable(true)
-    //         .title("Hello, World!")
-    //         .build();
-
-    //     let button = Button::with_label("Click me!");
-    //     button.connect_clicked(clone!(@weak win, @weak button => move |_| {
-    //         let size = &win.size();
-    //         let ssize = format!("{}, {}", size.0.to_string(), size.1.to_string());
-    //         button.set_label(ssize.as_str());
-    //     }));
-    //     win.add(&button);
-
-    //     win.show_all();
-    // });
-
-    // app.run();
 }
