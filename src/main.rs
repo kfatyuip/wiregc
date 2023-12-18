@@ -12,7 +12,7 @@ fn build_ui(app: &gtk::Application) {
     win.set_application(Some(app));
     let loader = PixbufLoader::with_type("svg").unwrap();
     loader
-        .write(include_bytes!("../resouces/icon.svg"))
+        .write(include_bytes!("../resouces/wireguard.svg"))
         .unwrap();
     loader.close().unwrap();
     win.set_icon(Some(&loader.pixbuf()).unwrap().as_ref());
@@ -30,7 +30,8 @@ fn build_ui(app: &gtk::Application) {
     win.show_all();
 }
 
-fn main() {
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let application = gtk::Application::new(Some("wireqc.moy.kirean"), Default::default());
 
     application.connect_activate(|app| {
@@ -38,4 +39,6 @@ fn main() {
     });
 
     application.run();
+
+    Ok(())
 }
