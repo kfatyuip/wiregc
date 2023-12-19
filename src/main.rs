@@ -2,6 +2,7 @@ use wiregc::conf;
 use wiregc::exec;
 
 use gdk_pixbuf::PixbufLoader;
+use glib::GString;
 use glib::clone;
 use gtk::prelude::*;
 
@@ -37,7 +38,7 @@ fn build_ui(app: &gtk::Application) {
     tunnel_listbox.show_all();
     let button: gtk::Button = builder.object("active").unwrap();
     button.connect_clicked(clone!(@strong button=> move |_| {
-    let mut selected_interface:glib::GString = glib::GString::new();
+    let mut selected_interface:GString = GString::new();
         for childrow in tunnel_listbox.children().iter()
         {
             let row:gtk::ListBoxRow = childrow.clone().downcast::<gtk::ListBoxRow>().unwrap();
