@@ -38,7 +38,7 @@ fn build_ui(app: &gtk::Application) {
         .collect();
 
     for interface in &interfaces {
-        let row = gtk::ListBoxRow::new();
+        let row: gtk::ListBoxRow = gtk::ListBoxRow::new();
         row.add(&gtk::Label::new(Some(&interface)));
         tunnel_listbox.add(&row);
     }
@@ -54,7 +54,7 @@ fn build_ui(app: &gtk::Application) {
             if row.is_selected() {
                 for childlabel in row.children().iter() {
                     let label = childlabel.downcast_ref::<gtk::Label>().unwrap();
-                    let text:GString = label.label();
+                    let text = label.label();
                     selected_interface = Some(text);
                 }
             }
