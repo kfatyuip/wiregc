@@ -1,4 +1,3 @@
-// use std::path::Path;
 use std::process::Command;
 
 pub fn wgquick(args: Vec<&str>) -> Option<i32> {
@@ -6,8 +5,6 @@ pub fn wgquick(args: Vec<&str>) -> Option<i32> {
         .args(args)
         .output()
         .expect("Unable to exec wg-quick");
-
-    // println!("{:?}", output);
 
     match output.status.code() {
         Some(code) => eprintln!("Exited with status code: {code}"),

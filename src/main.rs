@@ -3,8 +3,9 @@ use wiregc::exec;
 
 use gdk_pixbuf::PixbufLoader;
 use glib::clone;
-use glib::GString;
 use gtk::prelude::*;
+use std::cell::RefCell;
+use std::rc::Rc;
 
 fn build_ui(app: &gtk::Application) {
     let glade_src = include_str!("wiregc.glade");
@@ -47,26 +48,34 @@ fn build_ui(app: &gtk::Application) {
     let button: gtk::Button = builder
         .object("active")
         .expect("Failed to get active button");
-    button.connect_clicked(clone!(@strong button => move |_| {
-        let mut selected_interface: Option<glib::GString> = None;
-        for childrow in tunnel_listbox.children().iter() {
-            let row = childrow.downcast_ref::<gtk::ListBoxRow>().unwrap();
-            if row.is_selected() {
-                for childlabel in row.children().iter() {
-                    let label = childlabel.downcast_ref::<gtk::Label>().unwrap();
-                    let text = label.label();
-                    selected_interface = Some(text);
+    let connect_interface: Option<glib::GString> = None;
+    let connect_interface_ptr = Rc::new(RefCell::new(connect_interface.clone())).clone();
+    button.connect_clicked(
+        clone!(@strong button, @strong connect_interface_ptr => move |_| {
+            let mut selected_interface: Option<glib::GString> = None;
+            for childrow in tunnel_listbox.children().iter() {
+                let row = childrow.downcast_ref::<gtk::ListBoxRow>().unwrap();
+                if row.is_selected() {
+                    for childlabel in row.children().iter() {
+                        let label = childlabel.downcast_ref::<gtk::Label>().unwrap();
+                        let text = label.label();
+                        selected_interface = Some(text);
+                    }
                 }
             }
-        }
-        if button.label().unwrap().as_str() == "active" {
-            button.set_label("disable");
-            exec::active_wg(&selected_interface.unwrap().as_str()).unwrap();
-        } else {
-            button.set_label("active");
-            exec::deactive_wg(&selected_interface.unwrap().as_str()).unwrap();
-        }
-    }));
+            if connect_interface_ptr.borrow().clone() != None {
+                exec::deactive_wg(&connect_interface_ptr.borrow().clone().unwrap().as_str()).unwrap();
+                *connect_interface_ptr.borrow_mut() = None;
+            }
+            if button.label().unwrap().as_str() == "active" {
+                exec::active_wg(&selected_interface.clone().unwrap().as_str()).unwrap();
+                button.set_label("deactive");
+                *connect_interface_ptr.borrow_mut() = selected_interface;
+            } else {
+                button.set_label("active");
+            }
+        }),
+    );
 
     win.show_all();
 }
