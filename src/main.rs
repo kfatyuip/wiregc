@@ -48,8 +48,7 @@ fn build_ui(app: &gtk::Application) {
     let button: gtk::Button = builder
         .object("active")
         .expect("Failed to get active button");
-    let connect_interface: Option<glib::GString> = None;
-    let connect_interface_ptr = Rc::new(RefCell::new(connect_interface.clone())).clone();
+    let connect_interface_ptr = Rc::new(RefCell::new(None::<glib::GString>)).clone();
     button.connect_clicked(
         clone!(@strong button, @strong connect_interface_ptr => move |_| {
             let mut selected_interface: Option<glib::GString> = None;
