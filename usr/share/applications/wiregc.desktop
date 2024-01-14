@@ -5,4 +5,4 @@ Type=Application
 Terminal=false
 Exec=/usr/bin/wiregc
 Name=wiregc
-Icon=wiregc
+Icon=wireguard
