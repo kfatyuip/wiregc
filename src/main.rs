@@ -18,7 +18,7 @@ fn build_ui(app: &gtk::Application) {
 
     let loader = PixbufLoader::with_type("svg").expect("Failed to create PixbufLoader for SVG");
     loader
-        .write(include_bytes!("../resouces/wireguard.svg"))
+        .write(include_bytes!("../resources/wireguard.svg"))
         .expect("Failed to read SVG data");
     loader.close().expect("Failed to close PixbufLoader");
     if let Some(pixbuf) = loader.pixbuf() {
