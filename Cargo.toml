@@ -1,6 +1,8 @@
 [package]
 name = "wiregc"
 version = "0.1.0"
+authors = ["Kieran Moy <kfatyuip@163.com>"]
+homepage = "https://github.com/kfatyuip/wiregc"
 edition = "2021"
 
 description = "wireguird gtk client"
