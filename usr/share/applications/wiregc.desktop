@@ -6,3 +6,5 @@ Terminal=false
 Exec=/usr/bin/wiregc
 Name=wiregc
 Icon=wireguard
+Keywords=wireguard
+Categories=Network;Utility;
