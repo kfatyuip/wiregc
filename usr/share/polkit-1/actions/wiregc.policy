@@ -3,7 +3,7 @@
  "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
  "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
 <policyconfig>
-    <action id="wiregc.gui">
+    <action id="org.freedesktop.policykit.pkexec.wiregc">
         <description>wireguard gtk client</description>
         <message>Authentication is required to run wiregc</message>
         <!-- <icon_name>accessories-text-editor</icon_name> -->
