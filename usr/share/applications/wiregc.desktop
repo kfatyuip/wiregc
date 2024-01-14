@@ -8,3 +8,4 @@ Name=wiregc
 Icon=wireguard
 Keywords=wireguard
 Categories=Network;Utility;
+Comment=wireguard gtk client
