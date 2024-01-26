@@ -79,8 +79,7 @@ fn build_ui(app: &gtk::Application) {
     win.show_all();
 }
 
-#[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
+fn main() -> Result<(), Box<dyn std::error::Error>> {
     let application = gtk::Application::new(Some("wireqc.moy.kirean"), Default::default());
 
     application.connect_activate(|app| {

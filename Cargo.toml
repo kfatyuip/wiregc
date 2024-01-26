@@ -6,11 +6,10 @@ edition = "2021"
 
 description = "wireguird gtk client"
 repository = "https://github.com/kfatyuip/wiregc"
-keywords = ["linux", "rust", "gtk", "tokio", "cargo", "wireguard"]
+keywords = ["linux", "rust", "gtk", "cargo", "wireguard"]
 license = "MIT"
 
 [dependencies]
 gdk-pixbuf = "0.18.3"
 glib = "0.18.4"
 gtk = "0.18.1"
-tokio = { version = "1.35.0", features = ["full"] }
