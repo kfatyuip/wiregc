@@ -40,7 +40,7 @@ fn build_ui(app: &gtk::Application) {
 
     for interface in &interfaces {
         let row: gtk::ListBoxRow = gtk::ListBoxRow::new();
-        row.add(&gtk::Label::new(Some(&interface)));
+        row.add(&gtk::Label::new(Some(interface)));
         tunnel_listbox.add(&row);
     }
     tunnel_listbox.show_all();
@@ -62,12 +62,12 @@ fn build_ui(app: &gtk::Application) {
                     }
                 }
             }
-            if connect_interface_ptr.borrow().clone() != None {
-                exec::deactive_wg(&connect_interface_ptr.borrow().clone().unwrap().as_str()).unwrap();
+            if connect_interface_ptr.borrow().clone().is_some() {
+                exec::deactive_wg(connect_interface_ptr.borrow().clone().unwrap().as_str()).unwrap();
                 *connect_interface_ptr.borrow_mut() = None;
             }
             if button.label().unwrap().as_str() == "active" {
-                exec::active_wg(&selected_interface.clone().unwrap().as_str()).unwrap();
+                exec::active_wg(selected_interface.clone().unwrap().as_str()).unwrap();
                 button.set_label("deactive");
                 *connect_interface_ptr.borrow_mut() = selected_interface;
             } else {
